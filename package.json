@@ -1,0 +1,19 @@
+{
+  "name": "sponsor",
+  "version": "1.0.0",
+  "description": "sponsor technical test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbejaCruz/sponsor.git"
+  },
+  "author": "Diego Cruz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AbejaCruz/sponsor/issues"
+  },
+  "homepage": "https://github.com/AbejaCruz/sponsor#readme"
+}
