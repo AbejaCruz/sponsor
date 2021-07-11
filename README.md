@@ -33,5 +33,5 @@ Configure environment variables in the .env.example with the values needed to co
 Start the server
 
 ```bash
-    npm run dev
+    npm run start
 ```

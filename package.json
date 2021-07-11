@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel src --out-dir dist",
-    "dev": "nodemon src/app.js --exec babel-node",
-    "start": "node dist/app.js"
+    "start": "nodemon pm2 start src/app.js"
   },
   "repository": {
     "type": "git",
@@ -43,6 +41,7 @@
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.7",
+    "pm2": "^5.1.0",
     "util": "^0.12.4"
   }
 }
