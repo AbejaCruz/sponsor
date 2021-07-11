@@ -1,0 +1,43 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Index</title>
+  </head>
+  <body>
+    <div class="topnav" id="myTopnav">
+      <a href="/" class="active">Home</a>
+      {{#if user}}
+        <a href="/profile">Profile</a>
+        <a href="/auth/logout">Logout</a>
+      {{else}}
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+      {{/if}}
+      <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
+    <div>
+      <div>
+        <h1>Login Project</h1>
+        <p>This is a simple hero unit, a simple jumbotron-style component for
+          calling extra attention to featured content or information.</p>
+        <hr />
+        <p>It uses utility classes for typography and spacing to space content
+          out within the larger container.</p>
+        <a href="#" role="button">Learn more</a>
+      </div>
+    </div>
+    <script>
+      function myFunction() { var x = document.getElementById("myTopnav"); if
+      (x.className === "topnav") { x.className += " responsive"; } else {
+      x.className = "topnav"; } }
+    </script>
+  </body>
+</html>
