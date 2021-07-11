@@ -1,6 +1,7 @@
 const mysql = require("mysql");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { promisify } = require("util");
 
 const db = mysql.createPool({
   host: process.env.DATABASE_HOST,
@@ -69,7 +70,6 @@ exports.login = async (req, res) => {
       "SELECT * FROM users WHERE email = ?",
       [email],
       async (error, results) => {
-        console.log(results);
         if (
           !results ||
           !(await bcrypt.compare(password, results[0].password))
@@ -78,7 +78,7 @@ exports.login = async (req, res) => {
             message: "Email or Password is incorrect",
           });
         } else {
-          const id = results[0].id;
+          const id = results[0].id_u;
           const token = jwt.sign({ id }, process.env.JWT_SECRET, {
             expiresIn: process.env.JWT_EXPIRES_IN,
           });
@@ -100,4 +100,45 @@ exports.login = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
+};
+exports.isLoggedIn = async (req, res, next) => {
+  if (req.cookies.jwt) {
+    try {
+      const decoded = await promisify(jwt.verify)(
+        req.cookies.jwt,
+        process.env.JWT_SECRET
+      );
+
+      db.query(
+        "SELECT * FROM users WHERE id_u = ?",
+        [decoded.id],
+        (error, result) => {
+          if (!result) {
+            return next();
+          }
+
+          db.query("SELECT * FROM post", function (err, results, fields) {
+            req.user = result[0];
+            const info = results.reverse();
+            req.info = info;
+            return next();
+          });
+        }
+      );
+    } catch (error) {
+      console.log(error);
+      return next();
+    }
+  } else {
+    next();
+  }
+};
+
+exports.logout = async (req, res) => {
+  res.cookie("jwt", "logout", {
+    expires: new Date(Date.now() + 2 * 1000),
+    httpOnly: true,
+  });
+
+  res.status(200).redirect("/");
 };
