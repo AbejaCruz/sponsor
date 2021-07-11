@@ -3,7 +3,7 @@ const path = require("path");
 const mysql = require("mysql");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
-
+var helpers = require("handlebars-helpers")();
 dotenv.config({ path: "./.env" });
 
 const app = express();

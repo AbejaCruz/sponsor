@@ -2,64 +2,52 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="/style.css" />
     <title>Profile</title>
   </head>
   <body>
-
-    <div>
-      <div>
-
-        <div>
-
-          <div>
-
-            <p class="card-text">Some quick example text to build on the card
-              title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">{{user.email}}</a>
-          </div>
+    <div class="topnav" id="myTopnav">
+      <a href="/">Home</a>
+      <a href="/profile" class="active">Profile</a>
+      <a href="/auth/logout">Logout</a>
+      <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
+    <div class="container">
+      <h2>Hello {{user.first_name}}!!</h2>
+      <form action="/post/create" method="POST">
+        <input type="tex" id="id" name="id" class="id" value={{user.id_u}} />
+        <textarea
+          type="text"
+          id="message"
+          maxlength="220"
+          name="message"
+          placeholder="what's going on?"
+        ></textarea>
+        <div class="row">
+          <input type="submit" value="Tweet" class="Tweet" />
         </div>
-        <div>
-          <div>
+      </form>
+      {{#if result}}
+        <h4>{{result}}</h4>
+      {{/if}}
 
-            <form action="/post/create" method="POST">
-              <input type="tex" id="id" name="id" value={{user.id_u}} />
-              <input type="text" id="message" name="message" />
-              <button type="submit">Login</button>
-            </form>
-          </div>
+      <div>{{#each info}}
+          <h5>{{this.name}}</h5><p class="date">{{this.created}}</p>
+          <p>{{this.post}}</p>
 
-        </div>
-        {{#if result}}
-          <h4>{{result}}</h4>
-        {{/if}}
-        <div class="col-8">
-          <div class="card text-center">
-            <div class="card-header">
-              Profile Page
-            </div>
-            <div class="card-body">
-
-              <div class="searchResultItem col-sm-9 col-xs-12">
-                {{#each info}}
-                  <span>{{this.name}}</span>
-                  <p>{{this.post}}</p>
-
-                {{/each}}
-
-              </div>
-              <h5 class="card-title">Hey welcome back</h5>
-              <p class="card-text">This is your profile page where you can add
-                all the information about yourself</p>
-              <a href="#" class="btn btn-primary">Go Somewhere</a>
-            </div>
-            <div class="card-footer text-muted">
-              Node MySQL - Project
-            </div>
-          </div>
-        </div>
-      </div>
-
+        {{/each}}</div>
     </div>
 
+    <script>
+      function myFunction() { var x = document.getElementById("myTopnav"); if
+      (x.className === "topnav") { x.className += " responsive"; } else {
+      x.className = "topnav"; } }
+    </script>
   </body>
 </html>

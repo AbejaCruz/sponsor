@@ -120,7 +120,9 @@ exports.isLoggedIn = async (req, res, next) => {
           db.query("SELECT * FROM post", function (err, results, fields) {
             req.user = result[0];
             const info = results.reverse();
+
             req.info = info;
+
             return next();
           });
         }
