@@ -1,9 +1,10 @@
 const express = require("express");
 const path = require("path");
 const mysql = require("mysql");
+var cors = require("cors");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
-var helpers = require("handlebars-helpers")();
+
 dotenv.config({ path: "./.env" });
 
 const app = express();
@@ -15,6 +16,13 @@ const db = mysql.createPool({
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE,
 });
+
+var corsOptions = {
+  origin: "*",
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 
 const publicDirectory = path.join(__dirname, "./public");
 app.set("views", path.join(__dirname, "./views"));
